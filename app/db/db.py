@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
+# from sqlalchemy.orm import Mapped, mapped_column
 
 # Загружаем переменные из файла .env в окружение системы
 load_dotenv()
@@ -22,3 +23,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 class Base(DeclarativeBase):
     pass
+
+# class User(Base):
+#     __tablename__ = "users"
+#     id: Mapped[int] = mapped_column(primary_key=True)
+#     name: Mapped[str] = mapped_column()

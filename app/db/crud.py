@@ -14,6 +14,16 @@ def create_category(db: Session, category: schemas.CategoryCreate):
 def get_categories(db: Session):
     return db.scalars(select(models.Category)).all()
 
+def update_category(db: Session, category_id: int, category_update: schemas.CategoryCreate):
+    db_cat = db.get(models.Category, category_id)
+    if db_cat:
+        for key, value in category_update.model_dump().items():
+            setattr(db_cat, key, value)
+        db.commit()
+        db.refresh(db_cat)
+    return db_cat
+
+
 def delete_category(db: Session, category_id: int):
     db_category = db.get(models.Category, category_id)
     if db_category:
