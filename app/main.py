@@ -8,6 +8,14 @@ from sqlalchemy import select
 # Описание ручек и приложения FastAPI
 app = FastAPI(title="Octagon Book Store")
 
+# Эндпоинт /health
+@app.get("/health", tags=["system"])
+def health_check():
+    return {
+        "status": "ok",
+        "message": "Service is healthy and running"
+    }
+
 app.include_router(categories.router)
 app.include_router(books.router)
 
